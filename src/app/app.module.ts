@@ -7,6 +7,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { AppRoutingModule } from './app.routing.module';
 import { ErrorComponent } from './error/error.component';
 import { ListTodosComponent } from './list-todos/list-todos.component';
+import {RouterModule} from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { ListTodosComponent } from './list-todos/list-todos.component';
   imports: [
     BrowserModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    RouterModule
   ],
   providers: [],
   bootstrap: [AppComponent]
