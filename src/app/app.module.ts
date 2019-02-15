@@ -11,6 +11,7 @@ import {RouterModule} from '@angular/router';
 import { MenuComponent } from './menu/menu.component';
 import { FooterComponent } from './footer/footer.component';
 import { LogoutComponent } from './logout/logout.component';
+import { HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { LogoutComponent } from './logout/logout.component';
     BrowserModule,
     FormsModule,
     AppRoutingModule,
-    RouterModule
+    RouterModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
