@@ -8,3 +8,6 @@
   <h1>Click here</h1>
   <button (click)="getWelcomeMessage()" class="btn btn-success">Get welcome message</button>
 </div>
+<div class="container" *ngIf="welcomeMessageFromService">
+  <h2>Your message</h2>
+{{welcomeMessageFromService}}</div>
