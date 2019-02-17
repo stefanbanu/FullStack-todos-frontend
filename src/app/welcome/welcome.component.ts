@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {WelcomeDataService} from '../service/data/welcome-data.service';
 
@@ -8,6 +8,7 @@ import {WelcomeDataService} from '../service/data/welcome-data.service';
   styleUrls: ['./welcome.component.css']
 })
 export class WelcomeComponent implements OnInit {
+
 
   welcomeMessageFromService: string;
   name = ''
@@ -21,13 +22,22 @@ export class WelcomeComponent implements OnInit {
   }
 
   getWelcomeMessage() {
-    console.log(this.service.executeHelloWorldBeanService());
-    this.service.executeHelloWorldBeanService().subscribe(response => this.handleSuccessfulResponse(response));
+    // console.log(this.service.executeHelloWorldBeanService());
+    this.service.executeHelloWorldBeanService().subscribe(
+      response => this.handleSuccessfulResponse(response),
+       error => this.handleErrorResponse(error));
   }
 
   handleSuccessfulResponse(response) {
     // console.log(response);
     // console.log(response.message);
     this.welcomeMessageFromService = response.message;
+  }
+
+  handleErrorResponse(error) {
+    // console.log(error);
+    // console.log(error.error());
+    // console.log(error.error.message);
+    this.welcomeMessageFromService = error.error.message;
   }
 }
