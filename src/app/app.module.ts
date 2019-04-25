@@ -35,7 +35,7 @@ import {HttpInterceptorBasicAuthService} from './service/http/http-interceptor-b
     HttpClientModule
   ],
   providers: [
-    {provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorBasicAuthService, multi: true}
+    // {provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorBasicAuthService, multi: true}
   ],
   bootstrap: [AppComponent]
 })
