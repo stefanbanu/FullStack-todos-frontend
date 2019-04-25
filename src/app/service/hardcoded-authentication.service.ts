@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
+import {BasicAuthenticationService} from './basic-authentication.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HardcodedAuthenticationService {
 
-  constructor() { }
+  constructor(private basicAuthenticationService: BasicAuthenticationService) { }
 
   authenticate(username, password) {
     // console.log('before ' + this.isUserLoggedIn());
-    if (username === 'stefan' && password === 'dummy') {
+    if (username === this.basicAuthenticationService.getAuthenticatedUser() && password === 'dummy') {
       sessionStorage.setItem('authenticaterUser', username);
       // console.log('after ' + this.isUserLoggedIn());
       return true;

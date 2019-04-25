@@ -3,6 +3,7 @@ import {Component, OnInit} from '@angular/core';
 import {TodoDataService} from '../service/data/todo-data.service';
 import {Todo} from '../list-todos/list-todos.component';
 import {ActivatedRoute, Router} from '@angular/router';
+import {BasicAuthenticationService} from '../service/basic-authentication.service';
 
 @Component({
   selector: 'app-todo',
@@ -16,7 +17,8 @@ export class TodoComponent implements OnInit {
 
   constructor(private todoService: TodoDataService,
               private  route: ActivatedRoute,
-              private router: Router) {
+              private router: Router,
+              private  basicAuthenticationService: BasicAuthenticationService) {
   }
 
   ngOnInit() {
@@ -24,7 +26,7 @@ export class TodoComponent implements OnInit {
     this.todo = new Todo(this.id, '', false, new Date());
 
     if (this.id != -1) {
-      this.todoService.retrieveTodo('stefan', this.id)
+      this.todoService.retrieveTodo( this.basicAuthenticationService.getAuthenticatedUser(), this.id)
         .subscribe(
           data => this.todo = data
         );
@@ -32,9 +34,9 @@ export class TodoComponent implements OnInit {
   }
 
   saveTodo() {
-    if (this.id === -1) {
+    if (this.id == -1) {
 // Create Todo
-      this.todoService.createTodo('stefan', this.todo)
+      this.todoService.createTodo(this.basicAuthenticationService.getAuthenticatedUser(), this.todo)
         .subscribe(
           data => {
             console.log(data);
@@ -42,7 +44,7 @@ export class TodoComponent implements OnInit {
           }
         );
     } else {
-      this.todoService.updateTodo('stefan', this.id, this.todo)
+      this.todoService.updateTodo(this.basicAuthenticationService.getAuthenticatedUser(), this.id, this.todo)
         .subscribe(
           data => {
             console.log(data);
