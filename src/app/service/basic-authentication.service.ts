@@ -1,6 +1,5 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {HelloWorldBean} from './data/welcome-data.service';
 import {map} from 'rxjs/operators';
 import {API_URL} from '../app.constants';
 
@@ -19,8 +18,9 @@ export class BasicAuthenticationService {
   }
 
   getAuthenticatedToken() {
-    if (this.getAuthenticatedUser())
-    return sessionStorage.getItem(TOKEN);
+    if (this.getAuthenticatedUser()) {
+      return sessionStorage.getItem(TOKEN);
+    }
   }
 
   logout() {
@@ -46,7 +46,20 @@ export class BasicAuthenticationService {
     );
   }
 
+  executeJWTAuthenticationService(username, password) {
+    return this.http.post<any>(`${API_URL}/authenticate`, {username, password
+    }).pipe(
+      map(
+        data => {
+          sessionStorage.setItem(AUTHENTICATED_USER, username);
+          sessionStorage.setItem(TOKEN, `Bearer ${data.token}`);
+          return data;
+        }
+      )
+    );
+  }
 }
+
 
 export class AuthenticationBean {
   constructor(public message: string) {}
